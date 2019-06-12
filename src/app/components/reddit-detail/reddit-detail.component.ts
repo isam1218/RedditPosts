@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ApiService} from '../../service/api.service';
 
-// import { Reddit } from '../../models/reddit';
-
 
 @Component({
   selector: 'app-reddit-detail',
@@ -11,16 +9,7 @@ import {ApiService} from '../../service/api.service';
 })
 
 export class RedditDetailComponent implements OnInit {
-@Input() reddit: any;
+ @Input() reddit: any;
 
-
-constructor(private apiService: ApiService) {
-
-}
-
-  ngOnInit() {
-
-    
-  }
-
+ ngOnInit() {}
 }

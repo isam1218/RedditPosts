@@ -26,38 +26,41 @@ export class RedditComponent implements OnInit {
   ngOnInit() {  
     this.apiService.getPosts().subscribe(posts => {
       this.reddit = posts["data"].children;
-      
+      for(let i = 0; i < this.reddit.length;i++){
+        this.reddit[i].data.show = false;
+      }
     });
   }
 
 
-  onSelect(reddit: Object): void {
+  onSelect(selectedReddit: Object): void {
     for(let i = 0; i < this.reddit.length;i++){
-      this.reddit[i].data.hidden = true;
+      if(this.reddit[i].data.id != selectedReddit["data"].id)
+      this.reddit[i].data.show = false;
     }
-    this.selectedReddit = reddit;
-    this.selectedReddit["data"].hidden = !this.selectedReddit["data"].hidden;
+    this.selectedReddit = selectedReddit;
+    this.selectedReddit["data"].show = !this.selectedReddit["data"].show;
 
-  if(this.selectedReddit["data"].url.includes('comments')) {
-    this.selectedReddit["data"].url += ".json";
+    if(this.selectedReddit["data"].url.includes('comments')) {
+      this.selectedReddit["data"].url += ".json";
 
-    this.apiService.getComments(this.selectedReddit["data"].url).subscribe(posts => {
+      this.apiService.getComments(this.selectedReddit["data"].url).subscribe(posts => {
 
-      this.selectedReddit["data"].comments = posts[1].data.children;
-      
-    });
-  }
-  else if(this.selectedReddit["data"].permalink.includes("comments")) {
-    var url = 'http://www.reddit.com';
+        this.selectedReddit["data"].comments = posts[1].data.children;
+        
+      });
+    }
+    else if(this.selectedReddit["data"].permalink.includes("comments")) {
+      var url = 'http://www.reddit.com';
 
-    url = url + this.selectedReddit["data"].permalink + ".json";
+      url = url + this.selectedReddit["data"].permalink + ".json";
 
-    this.apiService.getComments(url).subscribe(posts => {
+      this.apiService.getComments(url).subscribe(posts => {
 
-      this.selectedReddit["data"].comments = posts[1].data.children; 
+        this.selectedReddit["data"].comments = posts[1].data.children; 
 
-    });
-  }
+      });
+    }
   }
 
   showMore(){
