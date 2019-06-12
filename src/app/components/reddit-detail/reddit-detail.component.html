@@ -1,0 +1,7 @@
+<div class="reddit-comments" *ngIf="reddit" >
+  <ul class="comments">
+    <li *ngFor="let comments of reddit.data.comments">
+        <strong> {{comments.data.author}}:</strong> {{comments.data.body}} 
+    </li>
+  </ul>
+</div>

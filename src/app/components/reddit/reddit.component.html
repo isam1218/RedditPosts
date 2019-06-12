@@ -1,0 +1,20 @@
+<h2>NBA Posts</h2>
+
+<div class="reddits">
+
+   <div *ngFor="let posts of reddit|slice:start:end" 
+   (click)="onSelect(posts)">
+    <div class="list-item" [class.selected]="posts === selectedReddit">{{posts.data.title}}</div>
+    <div>
+    <app-reddit-detail  *ngIf="!posts.data.hidden" [reddit]="selectedReddit"></app-reddit-detail>
+    </div>
+  </div>
+
+  <button class="next" (click)="showMore()">Next</button>
+  <button  (click)="showLess()">Back</button>
+  <p>Page {{page}}</p>
+
+</div>
+
+
+

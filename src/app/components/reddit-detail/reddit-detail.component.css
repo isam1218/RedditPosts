@@ -1,0 +1,12 @@
+.reddit-comments {
+    padding: 20px;
+    color: #333;
+}
+
+.comments {
+    list-style:none;
+}
+
+.comments li {
+    margin:5px;
+}
