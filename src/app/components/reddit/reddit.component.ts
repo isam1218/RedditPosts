@@ -25,7 +25,7 @@ export class RedditComponent implements OnInit {
 
   ngOnInit() {  
     this.apiService.getPosts().subscribe(posts => {
-      this.reddit = posts.data.children;
+      this.reddit = posts["data"].children;
       
     });
   }
@@ -36,25 +36,25 @@ export class RedditComponent implements OnInit {
       this.reddit[i].data.hidden = true;
     }
     this.selectedReddit = reddit;
-    this.selectedReddit.data.hidden = !this.selectedReddit.data.hidden;
+    this.selectedReddit["data"].hidden = !this.selectedReddit["data"].hidden;
 
-  if(this.selectedReddit.data.url.includes('comments')) {
-    this.selectedReddit.data.url += ".json";
+  if(this.selectedReddit["data"].url.includes('comments')) {
+    this.selectedReddit["data"].url += ".json";
 
-    this.apiService.getComments(this.selectedReddit.data.url).subscribe(posts => {
+    this.apiService.getComments(this.selectedReddit["data"].url).subscribe(posts => {
 
-      this.selectedReddit.data.comments = posts[1].data.children;
+      this.selectedReddit["data"].comments = posts[1].data.children;
       
     });
   }
-  else if(this.selectedReddit.data.permalink.includes("comments")) {
+  else if(this.selectedReddit["data"].permalink.includes("comments")) {
     var url = 'http://www.reddit.com';
 
-    url = url + this.selectedReddit.data.permalink + ".json";
+    url = url + this.selectedReddit["data"].permalink + ".json";
 
     this.apiService.getComments(url).subscribe(posts => {
 
-      this.selectedReddit.data.comments = posts[1].data.children; 
+      this.selectedReddit["data"].comments = posts[1].data.children; 
 
     });
   }
